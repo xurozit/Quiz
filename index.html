@@ -1,546 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xurozit</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-  :root {
-    --ink: #1a1a18;
-    --ink-muted: #6b6b67;
-    --ink-faint: #b0afa8;
-    --paper: #faf9f6;
-    --paper-warm: #f3f1eb;
-    --accent: #4a7c59;
-    --accent-light: #e8f0eb;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
 
-  html { scroll-behavior: smooth; }
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+    }
 
-  body {
-    font-family: var(--sans);
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--paper);
-    border-bottom: 1px solid #e6e4dc;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-  }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
 
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    text-decoration: none;
-  }
+    .nav-links a {
+      text-decoration: none;
+      color: #cbd5f5;
+      font-weight: 500;
+      transition: 0.3s;
+    }
 
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
+    .nav-links a:hover {
+      color: white;
+    }
 
-  .nav-links a {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
 
-  .nav-links a:hover { color: var(--accent); }
+    .btn-primary {
+      background: #6366f1;
+      color: white;
+    }
 
-  /* HERO */
-  .hero {
-    padding: 7rem 2rem 5rem;
-    max-width: 860px;
-    margin: 0 auto;
-  }
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 90vh;
+      padding: 20px;
+    }
 
-  .hero-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
 
-  .hero-eyebrow::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--accent);
-  }
+    .hero p {
+      max-width: 600px;
+      margin-bottom: 30px;
+      color: #94a3b8;
+    }
 
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 2rem;
-  }
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+    }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #e2e8f0;
+    }
 
-  .hero-bio {
-    font-size: 1.1rem;
-    color: var(--ink-muted);
-    max-width: 560px;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-  }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #1e293b;
+      color: #64748b;
+    }
 
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 32px;
+      }
 
-  .tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.35rem 0.9rem;
-    border: 1px solid #d4d2ca;
-    border-radius: 999px;
-    color: var(--ink-muted);
-  }
-
-  .tag.accent {
-    background: var(--accent-light);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* DIVIDER */
-  .divider {
-    width: 100%;
-    max-width: 860px;
-    margin: 0 auto;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #d4d2ca 30%, #d4d2ca 70%, transparent);
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 5rem 2rem;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 3rem;
-  }
-
-  /* JOURNAL */
-  .posts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .post-card {
-    padding: 2rem;
-    background: var(--paper-warm);
-    border: 1px solid #e6e4dc;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .post-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .post-card.featured {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .post-meta {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-
-  .post-title {
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.3;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-  }
-
-  .post-card.featured .post-title {
-    font-size: 2rem;
-  }
-
-  .post-excerpt {
-    font-size: 0.9rem;
-    color: var(--ink-muted);
-    line-height: 1.7;
-  }
-
-  .post-img-placeholder {
-    background: var(--accent-light);
-    border-radius: 4px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* TOPICS */
-  .topics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .topic-card {
-    padding: 2rem 1.5rem;
-    border: 1px solid #e6e4dc;
-    border-radius: 4px;
-    text-align: center;
-    transition: border-color 0.2s;
-  }
-
-  .topic-card:hover { border-color: var(--accent); }
-
-  .topic-icon {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .topic-name {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-
-  .topic-desc {
-    font-size: 0.82rem;
-    color: var(--ink-muted);
-    line-height: 1.6;
-  }
-
-  /* MUSIC */
-  .music-banner {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 4rem 3rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .music-text h2 {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 0.75rem;
-  }
-
-  .music-text h2 em {
-    font-style: italic;
-    color: var(--ink-faint);
-  }
-
-  .music-text p {
-    font-size: 0.9rem;
-    color: var(--ink-faint);
-    max-width: 360px;
-    line-height: 1.7;
-  }
-
-  .music-badge {
-    flex-shrink: 0;
-    padding: 0.6rem 1.4rem;
-    border: 1px solid #5a5a56;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .about-aside {
-    position: sticky;
-    top: 80px;
-  }
-
-  .about-initial {
-    width: 80px;
-    height: 80px;
-    background: var(--accent-light);
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-  }
-
-  .about-aside h3 {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 0.25rem;
-  }
-
-  .about-aside .location {
-    font-size: 0.8rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.05em;
-  }
-
-  .about-body p {
-    font-size: 1rem;
-    color: var(--ink-muted);
-    margin-bottom: 1.5rem;
-    line-height: 1.85;
-  }
-
-  .about-body p:first-child {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    color: var(--ink);
-    font-weight: 300;
-  }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid #e6e4dc;
-    padding: 2.5rem 2rem;
-    max-width: 860px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .footer-note {
-    font-size: 0.8rem;
-    color: var(--ink-faint);
-  }
-
-  @media (max-width: 640px) {
-    .posts-grid, .post-card.featured { grid-template-columns: 1fr; }
-    .post-card.featured { grid-column: auto; }
-    .topics-grid { grid-template-columns: 1fr 1fr; }
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .about-aside { position: static; }
-    .music-banner { flex-direction: column; }
-    nav { padding: 0 1rem; }
-    .nav-links { gap: 1rem; }
-  }
-</style>
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="nav-logo">Xurozit</a>
-  <ul class="nav-links">
-    <li><a href="#journal">Journal</a></li>
-    <li><a href="#topics">Topics</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">From Assam, Northeast India</div>
-  <h1>Words, <em>culture</em>,<br>and things I love.</h1>
-  <p class="hero-bio">
-    Hi, I'm Xurozit — this is my corner of the internet. I write about Assam, the Northeast, the things that move me, and the world as I see it. Music is coming soon.
-  </p>
-  <div class="hero-tags">
-    <span class="tag accent">Journal</span>
-    <span class="tag">Assam &amp; Northeast</span>
-    <span class="tag">Culture</span>
-    <span class="tag">Photography</span>
-    <span class="tag">Music — coming soon</span>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- JOURNAL -->
-<section id="journal">
-  <div class="section-label">Latest from the journal</div>
-  <div class="posts-grid">
-
-    <div class="post-card featured">
-      <div>
-        <div class="post-meta">Journal &nbsp;·&nbsp; Latest</div>
-        <h2 class="post-title">The smell of rain on red Assam soil</h2>
-        <p class="post-excerpt">There is a specific kind of quiet that arrives just before the first monsoon rain in Assam. The air thickens, the birds go still, and then — that smell. Rich, earthy, like the land is exhaling.</p>
-      </div>
-      <div class="post-img-placeholder">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="1.5">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </div>
+  <nav>
+    <div class="logo">Brand</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Pricing</a>
+      <a href="#">Contact</a>
     </div>
+    <button class="btn btn-primary">Get Started</button>
+  </nav>
 
-    <div class="post-card">
-      <div class="post-meta">Culture</div>
-      <h3 class="post-title">Bihu is not just a festival. It's a feeling.</h3>
-      <p class="post-excerpt">Every April, Assam turns into something else entirely. The dhol starts and it doesn't matter where you are — you feel it.</p>
+  <section class="hero">
+    <h1>Build Something Modern</h1>
+    <p>A clean, minimal landing page you can actually use. Fast, responsive, and designed to look sharp.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary">Start Now</button>
+      <button class="btn btn-secondary">Learn More</button>
     </div>
+  </section>
 
-    <div class="post-card">
-      <div class="post-meta">Things I love</div>
-      <h3 class="post-title">A list of small things that make life beautiful</h3>
-      <p class="post-excerpt">Masala tea at dusk. The first page of a new notebook. The sound of the Brahmaputra on a still morning.</p>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- TOPICS -->
-<section id="topics">
-  <div class="section-label">What I write about</div>
-  <div class="topics-grid">
-    <div class="topic-card">
-      <span class="topic-icon">✍️</span>
-      <div class="topic-name">Journal</div>
-      <p class="topic-desc">Personal thoughts, reflections, and stories from everyday life.</p>
-    </div>
-    <div class="topic-card">
-      <span class="topic-icon">🌿</span>
-      <div class="topic-name">Assam &amp; Northeast</div>
-      <p class="topic-desc">Culture, history, food, and the beauty of Northeast India.</p>
-    </div>
-    <div class="topic-card">
-      <span class="topic-icon">♡</span>
-      <div class="topic-name">Things I love</div>
-      <p class="topic-desc">Places, food, books, moments — a running list of the good stuff.</p>
-    </div>
-    <div class="topic-card">
-      <span class="topic-icon">◎</span>
-      <div class="topic-name">Photography</div>
-      <p class="topic-desc">Images from the Northeast and beyond — the world through my lens.</p>
-    </div>
-    <div class="topic-card">
-      <span class="topic-icon">♪</span>
-      <div class="topic-name">Music</div>
-      <p class="topic-desc">Coming soon — original music, free to stream right here.</p>
-    </div>
-    <div class="topic-card" style="border-style: dashed; border-color: #d4d2ca;">
-      <span class="topic-icon" style="opacity: 0.3;">+</span>
-      <div class="topic-name" style="color: #b0afa8;">More to come</div>
-      <p class="topic-desc">This space grows as I do.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- MUSIC -->
-<section id="music" style="padding-top: 3rem; padding-bottom: 3rem;">
-  <div class="music-banner">
-    <div class="music-text">
-      <h2>Music is<br><em>on its way.</em></h2>
-      <p>When I make my own music, I'll put it here — free for everyone to listen to. No streaming fees. No gates. Just the music.</p>
-    </div>
-    <div class="music-badge">Coming soon</div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About me</div>
-  <div class="about-grid">
-    <div class="about-aside">
-      <div class="about-initial">X</div>
-      <h3>Xurozit</h3>
-      <p class="location">Assam, Northeast India</p>
-    </div>
-    <div class="about-body">
-      <p>Hi, I'm Xurozit — a writer, a dreamer, and someone who is deeply in love with the Northeast.</p>
-      <p>This site is my journal, my archive, and eventually my music room. I write about Assam because it deserves to be written about. The culture, the rivers, the festivals, the food — there's so much here that the world hasn't seen yet.</p>
-      <p>I also write about the small things. The things I love. The moments that catch you off guard and remind you that life is worth paying attention to.</p>
-      <p>Music is the next chapter. When I'm ready, it'll live here too — free for anyone to hear.</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">Xurozit</div>
-  <div class="footer-note">Written from Assam, with love.</div>
-</footer>
+  <footer>
+    © 2026 Your Brand. All rights reserved.
+  </footer>
 
 </body>
 </html>
