@@ -1,45 +1,50 @@
-<h2 class="sr-only">Chemistry quiz covering Amines and Biomolecules from Class 12 NCERT</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry Quiz — Amines & Biomolecules</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans,sans-serif);color:var(--color-text-primary);padding:1.5rem}
-.quiz-header{margin-bottom:1.5rem}
-.progress-bar{height:4px;background:var(--color-border-tertiary);border-radius:2px;margin-bottom:1rem}
-.progress-fill{height:100%;background:#7F77DD;border-radius:2px;transition:width 0.4s}
-.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem}
-.question-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem}
-.q-label{font-size:12px;font-weight:500;color:#7F77DD;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.05em}
-.q-text{font-size:15px;line-height:1.6;margin-bottom:1.25rem}
-.options{display:flex;flex-direction:column;gap:8px}
-.opt-btn{text-align:left;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 14px;font-size:14px;cursor:pointer;color:var(--color-text-primary);transition:background 0.15s,border-color 0.15s;line-height:1.5}
-.opt-btn:hover:not(:disabled){background:var(--color-background-tertiary);border-color:var(--color-border-secondary)}
-.opt-btn.correct{background:#EAF3DE;border-color:#639922;color:#27500A}
-.opt-btn.wrong{background:#FCEBEB;border-color:#E24B4A;color:#501313}
-.opt-btn.reveal{background:#E6F1FB;border-color:#378ADD;color:#042C53}
-.feedback{margin-top:1rem;font-size:13px;padding:10px 14px;border-radius:var(--border-radius-md);line-height:1.5}
-.feedback.correct{background:#EAF3DE;color:#27500A}
-.feedback.wrong{background:#FCEBEB;color:#501313}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem}
-.nav-btn{padding:8px 20px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:14px;color:var(--color-text-primary)}
-.nav-btn:hover{background:var(--color-background-secondary)}
-.nav-btn.primary{background:#534AB7;border-color:#534AB7;color:#EEEDFE}
-.nav-btn.primary:hover{background:#3C3489}
-.score-card{text-align:center;padding:2rem}
-.score-num{font-size:48px;font-weight:500;color:#534AB7;line-height:1}
-.score-label{font-size:14px;color:var(--color-text-secondary);margin-top:6px}
-.score-msg{font-size:15px;margin:1.5rem 0;line-height:1.6}
-.badge{display:inline-block;font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md);margin-bottom:1rem}
-.badge.chapter{background:#EEEDFE;color:#3C3489}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,sans-serif;background:#f5f4f0;color:#1a1a1a;padding:2rem;min-height:100vh}
+  .container{max-width:680px;margin:0 auto}
+  h1{font-size:18px;font-weight:500;margin-bottom:1.5rem;color:#1a1a1a}
+  .progress-bar{height:4px;background:#e0ddd6;border-radius:2px;margin-bottom:1rem}
+  .progress-fill{height:100%;background:#7F77DD;border-radius:2px;transition:width 0.4s}
+  .meta{display:flex;justify-content:space-between;font-size:13px;color:#888780;margin-bottom:1.5rem}
+  .question-card{background:#fff;border:0.5px solid #d3d1c7;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+  .q-label{font-size:11px;font-weight:500;color:#7F77DD;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.05em}
+  .q-text{font-size:15px;line-height:1.6;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:8px}
+  .opt-btn{text-align:left;background:#f5f4f0;border:0.5px solid #d3d1c7;border-radius:8px;padding:10px 14px;font-size:14px;cursor:pointer;color:#1a1a1a;transition:background 0.15s,border-color 0.15s;line-height:1.5;font-family:inherit}
+  .opt-btn:hover:not(:disabled){background:#e8e6e0;border-color:#b4b2a9}
+  .opt-btn.correct{background:#EAF3DE;border-color:#639922;color:#27500A}
+  .opt-btn.wrong{background:#FCEBEB;border-color:#E24B4A;color:#501313}
+  .feedback{margin-top:1rem;font-size:13px;padding:10px 14px;border-radius:8px;line-height:1.5}
+  .feedback.correct{background:#EAF3DE;color:#27500A}
+  .feedback.wrong{background:#FCEBEB;color:#501313}
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem}
+  .nav-btn{padding:8px 20px;border-radius:8px;border:0.5px solid #b4b2a9;background:transparent;cursor:pointer;font-size:14px;color:#1a1a1a;font-family:inherit}
+  .nav-btn:hover{background:#e8e6e0}
+  .nav-btn.primary{background:#534AB7;border-color:#534AB7;color:#EEEDFE}
+  .nav-btn.primary:hover{background:#3C3489}
+  .score-card{text-align:center;padding:2rem}
+  .score-num{font-size:48px;font-weight:500;color:#534AB7;line-height:1}
+  .score-label{font-size:14px;color:#888780;margin-top:6px}
+  .score-msg{font-size:15px;margin:1.5rem 0;line-height:1.6}
+  .badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:8px;margin-bottom:0.75rem;background:#EEEDFE;color:#3C3489;font-weight:500}
 </style>
-
-<div class="quiz-header">
+</head>
+<body>
+<div class="container">
+  <h1>Chemistry Quiz — Amines &amp; Biomolecules</h1>
   <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
   <div class="meta">
     <span id="q-counter">Question 1 of 12</span>
     <span id="score-live">Score: 0</span>
   </div>
+  <div id="quiz-area"></div>
 </div>
-
-<div id="quiz-area"></div>
 
 <script>
 const qs = [
@@ -95,9 +100,9 @@ const qs = [
   {
     ch:"Unit 10 — Biomolecules",
     q:"Sucrose is classified as a non-reducing sugar because:",
-    opts:["It has no hydroxyl groups","The reducing groups (aldehyde of glucose and keto of fructose) are both involved in the glycosidic bond","It is a polysaccharide","It cannot be hydrolysed"],
+    opts:["It has no hydroxyl groups","The reducing groups of both glucose and fructose are involved in the glycosidic bond","It is a polysaccharide","It cannot be hydrolysed"],
     ans:1,
-    exp:"In sucrose, the glycosidic linkage forms between C1 of α-D-glucose and C2 of β-D-fructose, blocking both reducing groups. Hence no free aldehyde or ketone is available, making it a non-reducing sugar."
+    exp:"In sucrose, the glycosidic linkage forms between C1 of α-D-glucose and C2 of β-D-fructose, blocking both reducing groups. Hence no free aldehyde or ketone is available, making it non-reducing."
   },
   {
     ch:"Unit 10 — Biomolecules",
@@ -108,10 +113,10 @@ const qs = [
   },
   {
     ch:"Unit 10 — Biomolecules",
-    q:"The peptide bond in proteins is an amide bond formed between:",
+    q:"The peptide bond in proteins is formed between:",
     opts:["Two amino groups","Two carboxyl groups","The –COOH of one amino acid and the –NH₂ of another","The –OH and –NH₂ groups"],
     ans:2,
-    exp:"A peptide bond (–CO–NH–) forms when the carboxyl group of one amino acid reacts with the amino group of the next, eliminating water. This linkage connects α-amino acids into polypeptide chains."
+    exp:"A peptide bond (–CO–NH–) forms when the carboxyl group of one amino acid reacts with the amino group of the next, eliminating water. This links α-amino acids into polypeptide chains."
   },
   {
     ch:"Unit 10 — Biomolecules",
@@ -125,88 +130,82 @@ const qs = [
     q:"Which vitamin deficiency causes scurvy?",
     opts:["Vitamin A","Vitamin B₁","Vitamin C","Vitamin D"],
     ans:2,
-    exp:"Vitamin C (ascorbic acid), found in citrus fruits, amla, and green leafy vegetables, prevents scurvy (bleeding gums). It is water-soluble and must be consumed regularly since it cannot be stored in the body."
+    exp:"Vitamin C (ascorbic acid), found in citrus fruits, amla, and green leafy vegetables, prevents scurvy (bleeding gums). It is water-soluble and cannot be stored in the body."
   }
 ];
 
-let cur=0, score=0, answered=false;
+let cur=0,score=0,answered=false;
 
 function render(){
   const total=qs.length;
   document.getElementById('prog').style.width=((cur/total)*100)+'%';
-  document.getElementById('q-counter').textContent=`Question ${cur+1} of ${total}`;
-  document.getElementById('score-live').textContent=`Score: ${score}`;
-
-  const q=qs[cur];
-  const area=document.getElementById('quiz-area');
+  document.getElementById('q-counter').textContent='Question '+(cur+1)+' of '+total;
+  document.getElementById('score-live').textContent='Score: '+score;
   answered=false;
-
-  area.innerHTML=`
-    <div class="question-card">
-      <div class="badge chapter">${q.ch}</div>
-      <div class="q-label">Question ${cur+1}</div>
-      <div class="q-text">${q.q}</div>
-      <div class="options" id="opts">
-        ${q.opts.map((o,i)=>`<button class="opt-btn" onclick="choose(${i})" id="opt-${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
-      </div>
-      <div id="feedback" style="display:none"></div>
-    </div>
-    <div class="nav">
-      <span style="font-size:13px;color:var(--color-text-secondary)">${cur+1}/${total}</span>
-      <button class="nav-btn primary" id="next-btn" style="display:none" onclick="next()">
-        ${cur===total-1?'See results →':'Next question →'}
-      </button>
-    </div>`;
+  const q=qs[cur];
+  document.getElementById('quiz-area').innerHTML=
+    '<div class="question-card">'+
+      '<div class="badge">'+q.ch+'</div>'+
+      '<div class="q-label">Question '+(cur+1)+'</div>'+
+      '<div class="q-text">'+q.q+'</div>'+
+      '<div class="options" id="opts">'+
+        q.opts.map((o,i)=>'<button class="opt-btn" onclick="choose('+i+')" id="opt-'+i+'">'+String.fromCharCode(65+i)+'. '+o+'</button>').join('')+
+      '</div>'+
+      '<div id="feedback" style="display:none"></div>'+
+    '</div>'+
+    '<div class="nav">'+
+      '<span style="font-size:13px;color:#888780">'+(cur+1)+'/'+total+'</span>'+
+      '<button class="nav-btn primary" id="next-btn" style="display:none" onclick="next()">'+
+        (cur===total-1?'See results →':'Next question →')+
+      '</button>'+
+    '</div>';
 }
 
 function choose(idx){
-  if(answered) return;
+  if(answered)return;
   answered=true;
   const q=qs[cur];
-  const correct=q.ans===idx;
-  if(correct) score++;
-
+  if(q.ans===idx)score++;
   q.opts.forEach((_,i)=>{
     const btn=document.getElementById('opt-'+i);
     btn.disabled=true;
-    if(i===q.ans) btn.classList.add('correct');
-    else if(i===idx && !correct) btn.classList.add('wrong');
+    if(i===q.ans)btn.classList.add('correct');
+    else if(i===idx&&q.ans!==idx)btn.classList.add('wrong');
   });
-
   const fb=document.getElementById('feedback');
   fb.style.display='block';
-  fb.className='feedback '+(correct?'correct':'wrong');
-  fb.innerHTML=(correct?'<strong>Correct.</strong> ':'<strong>Incorrect.</strong> ')+q.exp;
-
+  fb.className='feedback '+(q.ans===idx?'correct':'wrong');
+  fb.innerHTML=(q.ans===idx?'<strong>Correct.</strong> ':'<strong>Incorrect.</strong> ')+q.exp;
   document.getElementById('next-btn').style.display='inline-block';
-  document.getElementById('score-live').textContent=`Score: ${score}`;
+  document.getElementById('score-live').textContent='Score: '+score;
 }
 
 function next(){
   cur++;
-  if(cur>=qs.length) showResult();
+  if(cur>=qs.length)showResult();
   else render();
 }
 
 function showResult(){
   const pct=Math.round((score/qs.length)*100);
-  let msg='',cls='';
-  if(pct>=90){msg='Excellent — very strong command of both chapters.';cls='correct';}
-  else if(pct>=70){msg='Good work. Review the questions you missed and revisit those sections.';cls='';}
-  else{msg='Keep revising. Go back to the NCERT chapters and try again.';cls='wrong';}
-
-  document.getElementById('quiz-area').innerHTML=`
-    <div class="question-card score-card">
-      <div class="score-num">${score}/${qs.length}</div>
-      <div class="score-label">${pct}% correct</div>
-      <div class="score-msg">${msg}</div>
-      <button class="nav-btn primary" onclick="restart()">Restart quiz</button>
-    </div>`;
+  let msg='';
+  if(pct>=90)msg='Excellent — very strong command of both chapters.';
+  else if(pct>=70)msg='Good work. Review the questions you missed and revisit those sections.';
+  else msg='Keep revising. Go back to the NCERT chapters and try again.';
+  document.getElementById('quiz-area').innerHTML=
+    '<div class="question-card score-card">'+
+      '<div class="score-num">'+score+'/'+qs.length+'</div>'+
+      '<div class="score-label">'+pct+'% correct</div>'+
+      '<div class="score-msg">'+msg+'</div>'+
+      '<button class="nav-btn primary" onclick="restart()">Restart quiz</button>'+
+    '</div>';
   document.getElementById('prog').style.width='100%';
   document.getElementById('q-counter').textContent='Completed';
-  document.getElementById('score-live').textContent=`Final score: ${score}/${qs.length}`;
+  document.getElementById('score-live').textContent='Final score: '+score+'/'+qs.length;
 }
 
 function restart(){cur=0;score=0;render();}
 render();
 </script>
+</body>
+</html>
