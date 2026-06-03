@@ -1,170 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Xurozit — Creator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<h2 class="sr-only">Chemistry quiz covering Amines and Biomolecules from Class 12 NCERT</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,sans-serif);color:var(--color-text-primary);padding:1.5rem}
+.quiz-header{margin-bottom:1.5rem}
+.progress-bar{height:4px;background:var(--color-border-tertiary);border-radius:2px;margin-bottom:1rem}
+.progress-fill{height:100%;background:#7F77DD;border-radius:2px;transition:width 0.4s}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem}
+.question-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem}
+.q-label{font-size:12px;font-weight:500;color:#7F77DD;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.05em}
+.q-text{font-size:15px;line-height:1.6;margin-bottom:1.25rem}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt-btn{text-align:left;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 14px;font-size:14px;cursor:pointer;color:var(--color-text-primary);transition:background 0.15s,border-color 0.15s;line-height:1.5}
+.opt-btn:hover:not(:disabled){background:var(--color-background-tertiary);border-color:var(--color-border-secondary)}
+.opt-btn.correct{background:#EAF3DE;border-color:#639922;color:#27500A}
+.opt-btn.wrong{background:#FCEBEB;border-color:#E24B4A;color:#501313}
+.opt-btn.reveal{background:#E6F1FB;border-color:#378ADD;color:#042C53}
+.feedback{margin-top:1rem;font-size:13px;padding:10px 14px;border-radius:var(--border-radius-md);line-height:1.5}
+.feedback.correct{background:#EAF3DE;color:#27500A}
+.feedback.wrong{background:#FCEBEB;color:#501313}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem}
+.nav-btn{padding:8px 20px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:14px;color:var(--color-text-primary)}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.primary{background:#534AB7;border-color:#534AB7;color:#EEEDFE}
+.nav-btn.primary:hover{background:#3C3489}
+.score-card{text-align:center;padding:2rem}
+.score-num{font-size:48px;font-weight:500;color:#534AB7;line-height:1}
+.score-label{font-size:14px;color:var(--color-text-secondary);margin-top:6px}
+.score-msg{font-size:15px;margin:1.5rem 0;line-height:1.6}
+.badge{display:inline-block;font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md);margin-bottom:1rem}
+.badge.chapter{background:#EEEDFE;color:#3C3489}
+</style>
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+<div class="quiz-header">
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div class="meta">
+    <span id="q-counter">Question 1 of 12</span>
+    <span id="score-live">Score: 0</span>
+  </div>
+</div>
 
-    body{
-      background: radial-gradient(circle at top,#1e293b,#020617);
-      color:#e2e8f0;
-      overflow-x:hidden;
-    }
+<div id="quiz-area"></div>
 
-    nav{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:20px 40px;position:sticky;top:0;
-      background:rgba(2,6,23,.6);backdrop-filter:blur(12px);
-    }
+<script>
+const qs = [
+  {
+    ch:"Unit 9 — Amines",
+    q:"What is the hybridisation of the nitrogen atom in amines?",
+    opts:["sp","sp²","sp³","sp³d"],
+    ans:2,
+    exp:"Nitrogen in amines is sp³ hybridised, giving amines a pyramidal geometry. The fourth sp³ orbital holds the lone pair of electrons."
+  },
+  {
+    ch:"Unit 9 — Amines",
+    q:"Which of the following processes is called ammonolysis?",
+    opts:["Reduction of nitro compounds","Cleavage of C–X bond in alkyl halides by ammonia","Reduction of amides using LiAlH₄","Gabriel phthalimide synthesis"],
+    ans:1,
+    exp:"Ammonolysis refers to cleavage of the C–X bond in alkyl or benzyl halides by an ammonia molecule, replacing the halogen with an –NH₂ group."
+  },
+  {
+    ch:"Unit 9 — Amines",
+    q:"Carbylamine reaction is used as a test for which class of amines?",
+    opts:["Primary amines only","Secondary amines only","Tertiary amines only","Both secondary and tertiary amines"],
+    ans:0,
+    exp:"Only primary aliphatic and aromatic amines give the carbylamine (isocyanide) test when heated with CHCl₃ and alcoholic KOH, producing foul-smelling isocyanides."
+  },
+  {
+    ch:"Unit 9 — Amines",
+    q:"Why are aromatic amines weaker bases than aliphatic amines?",
+    opts:["The aryl group increases electron density on nitrogen","The lone pair on nitrogen delocalises into the benzene ring, reducing its availability for protonation","Aromatic amines have higher molar mass","Steric hindrance prevents protonation"],
+    ans:1,
+    exp:"In arylamines like aniline, the –NH₂ lone pair is in conjugation with the benzene ring. This delocalisation makes the lone pair less available for protonation, reducing basicity."
+  },
+  {
+    ch:"Unit 9 — Amines",
+    q:"Which method cannot be used to prepare aromatic primary amines?",
+    opts:["Reduction of nitro compounds","Reduction of amides","Gabriel phthalimide synthesis","Hoffmann bromamide degradation"],
+    ans:2,
+    exp:"Gabriel phthalimide synthesis cannot prepare aromatic primary amines because aryl halides do not undergo nucleophilic substitution with the phthalimide anion."
+  },
+  {
+    ch:"Unit 9 — Amines",
+    q:"The conversion of primary aromatic amines into diazonium salts is known as:",
+    opts:["Coupling reaction","Diazotisation","Sandmeyer reaction","Gattermann reaction"],
+    ans:1,
+    exp:"Diazotisation is the process by which primary aromatic amines are converted to arenediazonium salts, typically by reaction with NaNO₂ and HCl at 273–278 K."
+  },
+  {
+    ch:"Unit 10 — Biomolecules",
+    q:"Carbohydrates are chemically defined as:",
+    opts:["Polymers of amino acids","Optically active polyhydroxy aldehydes or ketones, or compounds that yield such units on hydrolysis","Esters of fatty acids and glycerol","Long-chain polymers of nucleotides"],
+    ans:1,
+    exp:"Chemically, carbohydrates are optically active polyhydroxy aldehydes or ketones, or compounds that produce such units upon hydrolysis."
+  },
+  {
+    ch:"Unit 10 — Biomolecules",
+    q:"Sucrose is classified as a non-reducing sugar because:",
+    opts:["It has no hydroxyl groups","The reducing groups (aldehyde of glucose and keto of fructose) are both involved in the glycosidic bond","It is a polysaccharide","It cannot be hydrolysed"],
+    ans:1,
+    exp:"In sucrose, the glycosidic linkage forms between C1 of α-D-glucose and C2 of β-D-fructose, blocking both reducing groups. Hence no free aldehyde or ketone is available, making it a non-reducing sugar."
+  },
+  {
+    ch:"Unit 10 — Biomolecules",
+    q:"Which structural component distinguishes DNA from RNA?",
+    opts:["Adenine is present only in DNA","DNA contains 2-deoxyribose sugar; RNA contains ribose sugar","DNA is single-stranded; RNA is double-stranded","Guanine is absent in RNA"],
+    ans:1,
+    exp:"The sugar in DNA is β-D-2-deoxyribose (no –OH at C2), whereas RNA contains β-D-ribose. Also, DNA uses thymine while RNA uses uracil as the fourth base."
+  },
+  {
+    ch:"Unit 10 — Biomolecules",
+    q:"The peptide bond in proteins is an amide bond formed between:",
+    opts:["Two amino groups","Two carboxyl groups","The –COOH of one amino acid and the –NH₂ of another","The –OH and –NH₂ groups"],
+    ans:2,
+    exp:"A peptide bond (–CO–NH–) forms when the carboxyl group of one amino acid reacts with the amino group of the next, eliminating water. This linkage connects α-amino acids into polypeptide chains."
+  },
+  {
+    ch:"Unit 10 — Biomolecules",
+    q:"Denaturation of a protein destroys which levels of structure?",
+    opts:["Primary structure only","Secondary and tertiary structures; primary structure remains intact","All four levels including primary","Only quaternary structure"],
+    ans:1,
+    exp:"During denaturation (by heat or pH change), hydrogen bonds are disrupted, uncoiling the helix and unfolding the globule. The primary structure (amino acid sequence) remains intact."
+  },
+  {
+    ch:"Unit 10 — Biomolecules",
+    q:"Which vitamin deficiency causes scurvy?",
+    opts:["Vitamin A","Vitamin B₁","Vitamin C","Vitamin D"],
+    ans:2,
+    exp:"Vitamin C (ascorbic acid), found in citrus fruits, amla, and green leafy vegetables, prevents scurvy (bleeding gums). It is water-soluble and must be consumed regularly since it cannot be stored in the body."
+  }
+];
 
-    .logo{font-weight:700}
+let cur=0, score=0, answered=false;
 
-    .nav-links{display:flex;gap:20px}
-    .nav-links a{color:#94a3b8;text-decoration:none;font-size:14px}
-    .nav-links a:hover{color:#fff}
+function render(){
+  const total=qs.length;
+  document.getElementById('prog').style.width=((cur/total)*100)+'%';
+  document.getElementById('q-counter').textContent=`Question ${cur+1} of ${total}`;
+  document.getElementById('score-live').textContent=`Score: ${score}`;
 
-    .btn{
-      padding:10px 18px;border-radius:999px;border:none;cursor:pointer;
-      font-weight:600;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;
-      transition:.3s;
-    }
-    .btn:hover{transform:scale(1.05)}
+  const q=qs[cur];
+  const area=document.getElementById('quiz-area');
+  answered=false;
 
-    /* HERO */
-    .hero{
-      height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-      text-align:center;padding:20px;
-    }
-
-    .hero h1{
-      font-size:56px;max-width:800px;line-height:1.1;margin-bottom:20px;
-    }
-
-    .gradient{
-      background:linear-gradient(135deg,#38bdf8,#a78bfa);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-
-    .hero p{color:#94a3b8;max-width:500px;margin-bottom:30px}
-
-    .hero-buttons{display:flex;gap:15px;flex-wrap:wrap}
-
-    .btn-secondary{
-      background:transparent;border:1px solid #334155;color:#e2e8f0;
-    }
-
-    /* FEATURED */
-    .section{padding:80px 20px;max-width:1100px;margin:auto}
-
-    .section h2{text-align:center;font-size:32px;margin-bottom:40px}
-
-    .videos{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;
-    }
-
-    .video{
-      background:#020617;border:1px solid #1e293b;border-radius:16px;
-      overflow:hidden;transition:.3s;
-    }
-
-    .video:hover{transform:translateY(-6px);border-color:#6366f1}
-
-    .thumb{
-      height:160px;background:#1e293b;display:flex;align-items:center;justify-content:center;
-      color:#64748b;font-size:14px;
-    }
-
-    .video-content{padding:15px}
-
-    .video-content h3{font-size:16px;margin-bottom:6px}
-    .video-content p{font-size:13px;color:#94a3b8}
-
-    /* ABOUT */
-    .about{
-      text-align:center;max-width:700px;margin:auto;color:#94a3b8;
-    }
-
-    /* FOOTER */
-    footer{
-      text-align:center;padding:40px 20px;border-top:1px solid #1e293b;color:#64748b;
-    }
-
-    @media(max-width:768px){
-      .hero h1{font-size:36px}
-      .nav-links{display:none}
-    }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <div class="logo">Xurozit</div>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#featured">Featured</a>
-      <a href="#about">About</a>
-    </div>
-    <button class="btn">Subscribe</button>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>You don’t understand science. You <span class="gradient">memorize it.</span></h1>
-    <p>I break down complex ideas into short, clear explanations you actually remember.</p>
-
-    <div class="hero-buttons">
-      <button class="btn">Watch on YouTube</button>
-      <button class="btn btn-secondary">Follow Instagram</button>
-    </div>
-  </section>
-
-  <!-- FEATURED CONTENT -->
-  <section class="section" id="featured">
-    <h2>Featured Content</h2>
-
-    <div class="videos">
-      <div class="video">
-        <div class="thumb">Thumbnail</div>
-        <div class="video-content">
-          <h3>Why Time Slows Down</h3>
-          <p>Physics explained in 60 seconds</p>
-        </div>
+  area.innerHTML=`
+    <div class="question-card">
+      <div class="badge chapter">${q.ch}</div>
+      <div class="q-label">Question ${cur+1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts">
+        ${q.opts.map((o,i)=>`<button class="opt-btn" onclick="choose(${i})" id="opt-${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
       </div>
-
-      <div class="video">
-        <div class="thumb">Thumbnail</div>
-        <div class="video-content">
-          <h3>Black Holes Simplified</h3>
-          <p>No math, just clarity</p>
-        </div>
-      </div>
-
-      <div class="video">
-        <div class="thumb">Thumbnail</div>
-        <div class="video-content">
-          <h3>How AI Actually Works</h3>
-          <p>Stop being confused</p>
-        </div>
-      </div>
+      <div id="feedback" style="display:none"></div>
     </div>
-  </section>
+    <div class="nav">
+      <span style="font-size:13px;color:var(--color-text-secondary)">${cur+1}/${total}</span>
+      <button class="nav-btn primary" id="next-btn" style="display:none" onclick="next()">
+        ${cur===total-1?'See results →':'Next question →'}
+      </button>
+    </div>`;
+}
 
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <h2>About</h2>
-    <p class="about">
-      I create short-form content that makes science and ideas actually make sense.
-      No unnecessary complexity. No fluff. Just clear thinking.
-    </p>
-  </section>
+function choose(idx){
+  if(answered) return;
+  answered=true;
+  const q=qs[cur];
+  const correct=q.ans===idx;
+  if(correct) score++;
 
-  <footer>
-    © 2026 Xurozit — Built for attention & clarity
-  </footer>
+  q.opts.forEach((_,i)=>{
+    const btn=document.getElementById('opt-'+i);
+    btn.disabled=true;
+    if(i===q.ans) btn.classList.add('correct');
+    else if(i===idx && !correct) btn.classList.add('wrong');
+  });
 
-</body>
-</html>
+  const fb=document.getElementById('feedback');
+  fb.style.display='block';
+  fb.className='feedback '+(correct?'correct':'wrong');
+  fb.innerHTML=(correct?'<strong>Correct.</strong> ':'<strong>Incorrect.</strong> ')+q.exp;
+
+  document.getElementById('next-btn').style.display='inline-block';
+  document.getElementById('score-live').textContent=`Score: ${score}`;
+}
+
+function next(){
+  cur++;
+  if(cur>=qs.length) showResult();
+  else render();
+}
+
+function showResult(){
+  const pct=Math.round((score/qs.length)*100);
+  let msg='',cls='';
+  if(pct>=90){msg='Excellent — very strong command of both chapters.';cls='correct';}
+  else if(pct>=70){msg='Good work. Review the questions you missed and revisit those sections.';cls='';}
+  else{msg='Keep revising. Go back to the NCERT chapters and try again.';cls='wrong';}
+
+  document.getElementById('quiz-area').innerHTML=`
+    <div class="question-card score-card">
+      <div class="score-num">${score}/${qs.length}</div>
+      <div class="score-label">${pct}% correct</div>
+      <div class="score-msg">${msg}</div>
+      <button class="nav-btn primary" onclick="restart()">Restart quiz</button>
+    </div>`;
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('q-counter').textContent='Completed';
+  document.getElementById('score-live').textContent=`Final score: ${score}/${qs.length}`;
+}
+
+function restart(){cur=0;score=0;render();}
+render();
+</script>
